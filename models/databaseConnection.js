@@ -6,13 +6,13 @@ const sequelize = new Sequelize("sequelize-work", "root", "NEWPASSWORD", {
   port: 3306,
 });
 
-const databaseAuth = sequelize
-  .authenticate()
-  .then(() => {
+const databaseAuth = async () => {
+  try {
+    await sequelize.authenticate();
     console.log("Connection is successful!");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+  } catch (err) {
+   console.error(err);
+  }
+};
 
 module.exports = { sequelize, databaseAuth };
