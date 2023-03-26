@@ -32,6 +32,20 @@ const User = sequelize.define("user", {
     type: Sequelize.DataTypes.INTEGER,
     // defaultValue: 21
   },
+},
+{
+    // freezeTableName: A boolean that prevents Sequelize from automatically pluralizing the table name. If set to true, the table name will be the same as the model name.
+    // timestamps: A boolean that determines whether to create createdAt and updatedAt columns in the database. If set to false, these columns will not be created.
+    // tableName: A string that defines the name of the table in the database. If not specified, Sequelize will use the pluralized form of the model name.
+    // version: A boolean or string that defines the name of the column that will be used for optimistic locking. If set to true, the default column name will be version. If set to a string, that string will be used as the column name.
+    // paranoid: A boolean that enables "soft deletes", meaning that records are not actually deleted from the database but are marked as deleted by setting a deletedAt timestamp. If set to true, this option enables "soft deletes" for the model.
+
+    freezeTableName: true,
+    // timeStamps: false,
+    // tableName: "custom-name",
+    // version: true,
+    // version: true,
+    // paranoid: true
 });
 
 module.exports = User;
