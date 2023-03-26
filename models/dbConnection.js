@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-require("dotenv").config();
 
 const {DB, SCHEMA, ADMIN, PASS, HOST, PORT} = process.env;
 
