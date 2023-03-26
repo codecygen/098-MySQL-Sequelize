@@ -1,3 +1,3 @@
-const { sequelize, databaseAuth } = require("./models/databaseConnection");
+const { sequelize, databaseAuth } = require("./models/dbConnection");
 
 databaseAuth();
