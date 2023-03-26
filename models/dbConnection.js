@@ -1,9 +1,12 @@
 const Sequelize = require("sequelize");
+require("dotenv").config();
 
-const sequelize = new Sequelize("sequelize-work", "root", "NEWPASSWORD", {
-  dialect: "mysql",
-  host: "localhost",
-  port: 3306,
+const {DB, SCHEMA, ADMIN, PASS, HOST, PORT} = process.env;
+
+const sequelize = new Sequelize(SCHEMA, ADMIN, PASS, {
+  dialect: DB,
+  host: HOST,
+  port: PORT,
 });
 
 const databaseAuth = async () => {
@@ -11,7 +14,7 @@ const databaseAuth = async () => {
     await sequelize.authenticate();
     console.log("Connection is successful!");
   } catch (err) {
-   console.error(err);
+    console.error(err);
   }
 };
 
