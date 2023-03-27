@@ -47,7 +47,7 @@ const findTableRowById = async (tableModel, tableId) => {
     foundData.reload(); // reload method just reloads to the original database entry
 
     console.log(foundData.toJSON());
-    return foundData.toJSON();
+    return foundData; // do not return with toJSON(), it will break the sequelize, so any sequelize method won't work which would be returned by this function
   } catch (err) {
     console.error(err);
   }

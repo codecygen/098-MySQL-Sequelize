@@ -72,10 +72,10 @@ const newData = {
 
 // createTableRow(User, newData);
 
-// deleteTableRowById(User, 20);
+// deleteTableRowById(User, 1);
 
-findTableRowById(User, 1);
+// findTableRowById(User, 1);
 
-updateTableRowNameById(User, 1, "Updated Name");
+updateTableRowNameById(User, 1, "Jason");
 
 module.exports = User;
