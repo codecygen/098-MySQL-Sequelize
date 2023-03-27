@@ -28,7 +28,7 @@ const createTableRow = (tableModel, newData) => {
     });
 };
 
-const deleteTableId = (tableModel, tableId) => {
+const deleteTableRowById = (tableModel, tableId) => {
   tableModel
     .destroy({ where: { id: tableId } })
     .then((result) => {
@@ -42,10 +42,14 @@ const deleteTableId = (tableModel, tableId) => {
 const findTableRowById = async (tableModel, tableId) => {
   try {
     const foundData = await tableModel.findByPk(tableId);
+
+    foundData.id = 15354235;
+    foundData.reload(); // reload method just reloads to the original database entry
+    
     console.log(foundData.toJSON());
   } catch (err) {
     console.error(err);
   }
 };
 
-module.exports = { createTableRow, deleteTableId, findTableRowById };
+module.exports = { createTableRow,  deleteTableRowById, findTableRowById };

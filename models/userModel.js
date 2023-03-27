@@ -3,7 +3,7 @@ const { sequelize } = require("./dbConnection");
 
 const {
   createTableRow,
-  deleteTableId,
+  deleteTableRowById,
   findTableRowById,
 } = require("./dataManipulation");
 
@@ -71,7 +71,7 @@ const newData = {
 
 // createTableRow(User, newData);
 
-// deleteTableId(User, 20);
+// deleteTableRowById(User, 20);
 
 findTableRowById(User, 21);
 
