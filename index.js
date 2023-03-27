@@ -10,7 +10,6 @@ const Post = require("./models/postModel");
 
 databaseAuth();
 
-
 // User.sync.then.catch, // would only sync User model.
 // User.drop(); // would drop the table and if we write it would not exist.
 // sequelize.drop({ match: /^test/ }); // drop tables that starts with "test"
@@ -21,7 +20,7 @@ databaseAuth();
 // sequelize.drop({ match: /\d/g }); // finds all occurences of digits in tables and drop them.
 
 sequelize
-// .sync({ force: true }) // deletes all data and recreates the database with the model configs,
+  // .sync({ force: true }) // deletes all data and recreates the database with the model configs,
   .sync({ alter: true }) // only alters the data structure in the database
   .then((result) => {
     console.log("Successfully created models!");
