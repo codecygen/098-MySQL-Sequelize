@@ -6,10 +6,14 @@ const { sequelize, databaseAuth } = require("./models/dbConnection");
 // Because it is seen by sequelize.sync method in this file
 // and the model is updated accordingly in database.
 const User = require("./models/userModel");
+const Post = require("./models/postModel");
 
 databaseAuth();
 
 sequelize
+// force, deletes all data and recreates the database with the model configs,
+// alter, only alters the data structure in the database.
+// .sync({ force: true })
   .sync({ alter: true })
   .then((result) => {
     console.log("Successfully created models!");
