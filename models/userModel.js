@@ -76,6 +76,6 @@ const newData = {
 
 // findTableRowById(User, 1);
 
-updateTableColumnById(User, 1, "age", "20");
+updateTableColumnById(User, 1, "age", "15");
 
 module.exports = User;

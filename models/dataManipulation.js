@@ -58,7 +58,9 @@ const updateTableColumnById = async (tableModel, tableId, updatedKey, updatedVal
     const foundData = await findTableRowById(tableModel, tableId);
     foundData[updatedKey] = updatedValue;
 
-    await foundData.save({ fields: [updatedKey] }); // update name keyword as newRowName
+    // await foundData.save({ fields: [updatedKey] }); // update name keyword as newRowName
+    await foundData.save(); // not specifying the field is totally fine, because system knows which section is changed due to the command up top. It will increase the performance if it is written in this way.
+
     console.log("Data entry is updated with new name");
   } catch (err) {
     console.error(err);
