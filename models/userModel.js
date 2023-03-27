@@ -5,7 +5,7 @@ const {
   createTableRow,
   deleteTableRowById,
   findTableRowById,
-  updateTableRowNameById,
+  updateTableColumnById,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -76,6 +76,6 @@ const newData = {
 
 // findTableRowById(User, 1);
 
-updateTableRowNameById(User, 1, "Jason");
+updateTableColumnById(User, 1, "age", "20");
 
 module.exports = User;

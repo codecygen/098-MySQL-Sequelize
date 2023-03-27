@@ -53,12 +53,12 @@ const findTableRowById = async (tableModel, tableId) => {
   }
 };
 
-const updateTableRowNameById = async (tableModel, tableId, newRowName) => {
+const updateTableColumnById = async (tableModel, tableId, updatedKey, updatedValue) => {
   try {
     const foundData = await findTableRowById(tableModel, tableId);
-    foundData.name = newRowName;
+    foundData[updatedKey] = updatedValue;
 
-    await foundData.save({ fields: ["name"] }); // update name keyword as newRowName
+    await foundData.save({ fields: [updatedKey] }); // update name keyword as newRowName
     console.log("Data entry is updated with new name");
   } catch (err) {
     console.error(err);
@@ -69,5 +69,5 @@ module.exports = {
   createTableRow,
   deleteTableRowById,
   findTableRowById,
-  updateTableRowNameById,
+  updateTableColumnById,
 };
