@@ -1,7 +1,7 @@
 const createTableRow = (tableModel, newData) => {
   // creates new data
   // const user = User.build({
-  //   username: "aras",
+  //   name: "aras",
   //   password: "useraras",
   //   email: "aras@gmail.com",
   //   age: 23,
@@ -45,11 +45,29 @@ const findTableRowById = async (tableModel, tableId) => {
 
     foundData.id = 15354235;
     foundData.reload(); // reload method just reloads to the original database entry
-    
+
     console.log(foundData.toJSON());
+    return foundData.toJSON();
   } catch (err) {
     console.error(err);
   }
 };
 
-module.exports = { createTableRow,  deleteTableRowById, findTableRowById };
+const updateTableRowNameById = async (tableModel, tableId, newRowName) => {
+  try {
+    const foundData = await findTableRowById(tableModel, tableId);
+    foundData.name = newRowName;
+
+    await foundData.save({ fields: ["name"] }); // update name keyword as newRowName
+    console.log("Data entry is updated with new name");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+module.exports = {
+  createTableRow,
+  deleteTableRowById,
+  findTableRowById,
+  updateTableRowNameById,
+};

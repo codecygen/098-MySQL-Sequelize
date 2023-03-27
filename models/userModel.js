@@ -5,6 +5,7 @@ const {
   createTableRow,
   deleteTableRowById,
   findTableRowById,
+  updateTableRowNameById,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -22,7 +23,7 @@ const User = sequelize.define(
       primaryKey: true,
     },
 
-    username: {
+    name: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
     },
@@ -62,7 +63,7 @@ const User = sequelize.define(
 );
 
 const newData = {
-  username: "aras",
+  name: "aras",
   password: "useraras",
   email: "aras@gmail.com",
   age: 23,
@@ -73,6 +74,8 @@ const newData = {
 
 // deleteTableRowById(User, 20);
 
-findTableRowById(User, 21);
+findTableRowById(User, 1);
+
+updateTableRowNameById(User, 1, "Updated Name");
 
 module.exports = User;
