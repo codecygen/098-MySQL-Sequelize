@@ -18,7 +18,8 @@ const createTableRow = (tableModel, newData) => {
   //   });
 
   // instead of const user = User.build, user.save
-  tableModel.create(newData) // directly saves data to MySQL, newData is an object
+  tableModel
+    .create(newData) // directly saves data to MySQL, newData is an object
     .then((result) => {
       console.log("Added new user:", result.toJSON()); // unlike parse() in MongoDB, toJSON() is used in sequelize to get plain Javascript object.
     })
@@ -27,8 +28,9 @@ const createTableRow = (tableModel, newData) => {
     });
 };
 
-const deleteTableId = (tableModel, userId) => {
-  tableModel.destroy({ where: { id: userId } })
+const deleteTableId = (tableModel, tableId) => {
+  tableModel
+    .destroy({ where: { id: tableId } })
     .then((result) => {
       console.log(result);
     })
@@ -37,4 +39,13 @@ const deleteTableId = (tableModel, userId) => {
     });
 };
 
-module.exports = { createTableRow, deleteTableId };
+const findTableRowById = async (tableModel, tableId) => {
+  try {
+    const foundData = await tableModel.findByPk(tableId);
+    console.log(foundData.toJSON());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+module.exports = { createTableRow, deleteTableId, findTableRowById };

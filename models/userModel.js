@@ -1,7 +1,11 @@
 const Sequelize = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
-const { createTableRow, deleteTableId } = require("./dataManipulation");
+const {
+  createTableRow,
+  deleteTableId,
+  findTableRowById,
+} = require("./dataManipulation");
 
 // Commonly used data types are:
 // Numeric Data Types: TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT, FLOAT, DOUBLE, DECIMAL
@@ -66,6 +70,9 @@ const newData = {
 };
 
 // createTableRow(User, newData);
-deleteTableId(User, 20);
+
+// deleteTableId(User, 20);
+
+findTableRowById(User, 21);
 
 module.exports = User;
