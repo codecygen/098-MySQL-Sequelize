@@ -79,7 +79,7 @@ User.create({ // directly saves data to MySQL
   age: 23,
   permission: true
 }).then(result => {
-  console.log("Added new user:", result.toJSON()); // unlike parse() in MongoDB, toJSON() is used to get plain Javascript object.
+  console.log("Added new user:", result.toJSON()); // unlike parse() in MongoDB, toJSON() is used in sequelize to get plain Javascript object.
 })
 .catch(err => {
   console.error("Error saving user to the database:", err);
