@@ -114,9 +114,11 @@ const bulkCreateTableData = (tableModel, bulkData) => {
 };
 
 // findAll method
-const getAllTableData = (tableModel) => {
+const getAllTableData = (tableModel, attributeList = []) => {
+  let parenthesisObject = { attributes: attributeList }; // {attributes: []} or {attributes: []}
+
   tableModel
-    .findAll()
+    .findAll(parenthesisObject) // findAll() also works, attributes should contain an array of attributes like ["name", "password"] so it will only filter those fields
     .then((allTableData) => {
       allTableData.forEach((element) => {
         console.log(element.toJSON());

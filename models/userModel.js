@@ -91,6 +91,6 @@ const User = sequelize.define(
 
 // bulkCreateTableData(User, newDataSet);
 
-getAllTableData(User);
+getAllTableData(User, ["name", "password"]); // second argument is optional
 
 module.exports = User;
