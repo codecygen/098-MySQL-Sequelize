@@ -53,7 +53,12 @@ const findTableRowById = async (tableModel, tableId) => {
   }
 };
 
-const updateTableColumnById = async (tableModel, tableId, updatedKey, updatedValue) => {
+const updateTableColumnById = async (
+  tableModel,
+  tableId,
+  updatedKey,
+  updatedValue
+) => {
   try {
     const foundData = await findTableRowById(tableModel, tableId);
     foundData[updatedKey] = updatedValue;
@@ -67,9 +72,31 @@ const updateTableColumnById = async (tableModel, tableId, updatedKey, updatedVal
   }
 };
 
+const alterTableNumericValue = (
+  tableModel,
+  tableId,
+  updatedKey,
+  alteredAmount
+) => {
+  findTableRowById(tableModel, tableId)
+    .then((foundData) => {
+      if (+alteredAmount >= 0) {
+        foundData.increment(updatedKey, { by: +alteredAmount });
+        console.log("Data entry is updated with new numeric value");
+      } else {
+        foundData.decrement(updatedKey, { by: Math.abs(+alteredAmount) });
+        console.log("Data entry is updated with new numeric value");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
   findTableRowById,
   updateTableColumnById,
+  alterTableNumericValue,
 };
