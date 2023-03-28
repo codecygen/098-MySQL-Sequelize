@@ -79,6 +79,6 @@ const newData = {
 
 // updateTableColumnById(User, 1, "age", "15");
 
-alterTableNumericValue(User, 1, "age", 43404);
+alterTableNumericValue(User, 1, "age", 12);
 
 module.exports = User;

@@ -1,3 +1,4 @@
+// build, save, create methods
 const createTableRow = (tableModel, newData) => {
   // creates new data
   // const user = User.build({
@@ -28,6 +29,7 @@ const createTableRow = (tableModel, newData) => {
     });
 };
 
+// destroy method
 const deleteTableRowById = (tableModel, tableId) => {
   tableModel
     .destroy({ where: { id: tableId } })
@@ -39,6 +41,7 @@ const deleteTableRowById = (tableModel, tableId) => {
     });
 };
 
+// findByPk, reload methods, toJSON
 const findTableRowById = async (tableModel, tableId) => {
   try {
     const foundData = await tableModel.findByPk(tableId);
@@ -46,13 +49,14 @@ const findTableRowById = async (tableModel, tableId) => {
     foundData.id = 15354235;
     foundData.reload(); // reload method just reloads to the original database entry
 
-    console.log(foundData.toJSON());
+    console.log(foundData.toJSON()); // toJSON is used to get Javascript object
     return foundData; // do not return with toJSON(), it will break the sequelize, so any sequelize method won't work which would be returned by this function
   } catch (err) {
     console.error(err);
   }
 };
 
+// save method
 const updateTableColumnById = async (
   tableModel,
   tableId,
@@ -72,6 +76,7 @@ const updateTableColumnById = async (
   }
 };
 
+// increment, decrement methods
 const alterTableNumericValue = (
   tableModel,
   tableId,
@@ -80,11 +85,14 @@ const alterTableNumericValue = (
 ) => {
   findTableRowById(tableModel, tableId)
     .then((foundData) => {
-      if (+alteredAmount >= 0) {
-        foundData.increment(updatedKey, { by: +alteredAmount });
+      const alteredAmountNumber = parseFloat(alteredAmount);
+
+      if (alteredAmountNumber >= 0) {
+        foundData.increment({ [updatedKey]: alteredAmountNumber });
         console.log("Data entry is updated with new numeric value");
       } else {
-        foundData.decrement(updatedKey, { by: Math.abs(+alteredAmount) });
+        // decrement method has to accept positive value
+        foundData.decrement({ [updatedKey]: Math.abs(alteredAmountNumber) });
         console.log("Data entry is updated with new numeric value");
       }
     })
