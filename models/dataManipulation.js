@@ -102,6 +102,7 @@ const alterTableNumericValue = (
 };
 
 // bulkCreate method
+// bulkCreate method decreases performance
 // normally disregards validate keyword for password for User Model if the second argument "validate: true" is not specified.
 const bulkCreateTableData = (tableModel, bulkData) => {
   tableModel
