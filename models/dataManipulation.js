@@ -102,10 +102,10 @@ const alterTableNumericValue = (
 };
 
 // bulkCreate method
-// disregards validate keyword for password for User Model because it uses bulkCreate method
+// normally disregards validate keyword for password for User Model if the second argument "validate: true" is not specified.
 const bulkCreateTableData = (tableModel, bulkData) => {
   tableModel
-    .bulkCreate(bulkData)
+    .bulkCreate(bulkData, { validate: true }) // validate: true is needed if you want User Model's bulkData password lengths to be checked
     .then(result => {
       console.log(result);
     })

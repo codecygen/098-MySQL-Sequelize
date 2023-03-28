@@ -5,6 +5,7 @@ const {
   newData,
   longPassData,
   newDataSet,
+  longPassDataSet,
 } = require("./dummy-data/dummyUserData");
 
 const {
@@ -77,7 +78,7 @@ const User = sequelize.define(
 
 // createTableRow(User, newData);
 
-// deleteTableRowById(User, 1);
+deleteTableRowById(User, 1);
 
 // findTableRowById(User, 1);
 
@@ -85,6 +86,8 @@ const User = sequelize.define(
 
 // alterTableNumericValue(User, 1, "age", 12);
 
-// bulkCreateTableData(User, newDataSet) // disregards validate keyword for password for User Model because it uses bulkCreate method
+// bulkCreateTableData(User, longPassDataSet); // failes because defies the password length which is not in between 5 and 10 characters! It is defined in the model's password section with "validate" keyword
+
+// bulkCreateTableData(User, newDataSet);
 
 module.exports = User;

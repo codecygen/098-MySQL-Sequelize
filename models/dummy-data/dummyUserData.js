@@ -12,9 +12,33 @@ const longPassData = {
   email: "aras@gmail.com",
   age: 23,
   permission: true,
-}
+};
 
 const newDataSet = [
+  {
+    name: "dan",
+    password: "dan127",
+    email: "dan@gmail.com",
+    age: 66,
+    permission: false,
+  },
+  {
+    name: "jordan",
+    password: "awesome",
+    email: "awe@gmail.com",
+    age: 12,
+    permission: false,
+  },
+  {
+    name: "newdude",
+    password: "secretke",
+    email: "dudeawesome@gmail.com",
+    age: 38,
+    permission: true,
+  },
+];
+
+const longPassDataSet = [
   {
     name: "dan",
     password: "dan12",
@@ -38,4 +62,4 @@ const newDataSet = [
   },
 ];
 
-module.exports = { newData, longPassData, newDataSet };
+module.exports = { newData, longPassData, newDataSet, longPassDataSet };
