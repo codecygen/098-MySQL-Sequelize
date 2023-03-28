@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
-const { newData, newDataSet } = require("./dummy-data/dummUserData");
+const { newData, newDataSet } = require("./dummy-data/dummyUserData");
 
 const {
   createTableRow,
