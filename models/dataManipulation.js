@@ -107,10 +107,24 @@ const alterTableNumericValue = (
 const bulkCreateTableData = (tableModel, bulkData) => {
   tableModel
     .bulkCreate(bulkData, { validate: true }) // validate: true is needed if you want User Model's bulkData password lengths to be checked
-    .then(result => {
+    .then((result) => {
       console.log(result);
     })
     .catch((err) => console.error(err));
+};
+
+// findAll method
+const getAllTableData = (tableModel) => {
+  tableModel
+    .findAll()
+    .then((allTableData) => {
+      allTableData.forEach((element) => {
+        console.log(element.toJSON());
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 module.exports = {
@@ -120,4 +134,5 @@ module.exports = {
   updateTableColumnById,
   alterTableNumericValue,
   bulkCreateTableData,
+  getAllTableData,
 };

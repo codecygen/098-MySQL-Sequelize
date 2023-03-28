@@ -15,6 +15,7 @@ const {
   updateTableColumnById,
   alterTableNumericValue,
   bulkCreateTableData,
+  getAllTableData,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -78,7 +79,7 @@ const User = sequelize.define(
 
 // createTableRow(User, newData);
 
-deleteTableRowById(User, 1);
+// deleteTableRowById(User, 1);
 
 // findTableRowById(User, 1);
 
@@ -89,5 +90,7 @@ deleteTableRowById(User, 1);
 // bulkCreateTableData(User, longPassDataSet); // failes because defies the password length which is not in between 5 and 10 characters! It is defined in the model's password section with "validate" keyword
 
 // bulkCreateTableData(User, newDataSet);
+
+getAllTableData(User);
 
 module.exports = User;
