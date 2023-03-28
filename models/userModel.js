@@ -1,12 +1,15 @@
 const Sequelize = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
+const { newData, newDataSet } = require("./dummy-data/dummUserData");
+
 const {
   createTableRow,
   deleteTableRowById,
   findTableRowById,
   updateTableColumnById,
   alterTableNumericValue,
+  bulkCreateTableData,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -63,14 +66,6 @@ const User = sequelize.define(
   }
 );
 
-const newData = {
-  name: "aras",
-  password: "useraras",
-  email: "aras@gmail.com",
-  age: 23,
-  permission: true,
-};
-
 // createTableRow(User, newData);
 
 // deleteTableRowById(User, 1);
@@ -79,6 +74,8 @@ const newData = {
 
 // updateTableColumnById(User, 1, "age", "15");
 
-alterTableNumericValue(User, 1, "age", 12);
+// alterTableNumericValue(User, 1, "age", 12);
+
+bulkCreateTableData(User, newDataSet);
 
 module.exports = User;

@@ -88,11 +88,11 @@ const alterTableNumericValue = (
       const alteredAmountNumber = parseFloat(alteredAmount);
 
       if (alteredAmountNumber >= 0) {
-        foundData.increment({ [updatedKey]: alteredAmountNumber });
+        foundData.increment({ [updatedKey]: alteredAmountNumber }); // increment method can accept multiple keys and values, not just one like in this example
         console.log("Data entry is updated with new numeric value");
       } else {
         // decrement method has to accept positive value
-        foundData.decrement({ [updatedKey]: Math.abs(alteredAmountNumber) });
+        foundData.decrement({ [updatedKey]: Math.abs(alteredAmountNumber) }); // decrement method can accept multiple keys and values, not just one like in this example
         console.log("Data entry is updated with new numeric value");
       }
     })
@@ -101,10 +101,21 @@ const alterTableNumericValue = (
     });
 };
 
+// bulkCreate method
+const bulkCreateTableData = (tableModel, bulkData) => {
+  tableModel
+    .bulkCreate(bulkData)
+    .then(result => {
+      console.log(result);
+    })
+    .catch((err) => console.error(err));
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
   findTableRowById,
   updateTableColumnById,
   alterTableNumericValue,
+  bulkCreateTableData,
 };
