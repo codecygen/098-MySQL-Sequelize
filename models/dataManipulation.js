@@ -135,21 +135,24 @@ const getAllTableData = (tableModel, attributeList = []) => {
 const columTotalValue = (tableModel, columnName, ) => {
   tableModel
     .findAll({
-      // User.findall({attributes: {exclude: ["password"]}}).then.catch() is another way.
+      // User.findall({attributes: ["name", "password"]}).then().catch()
+      // User.findall({attributes: {exclude: ["password"]}}).then().catch() is another way.
       
       // User.findall({where: {age: 45}}).then.catch() is another way.
-      // User.findall({where: {age: 45, username: "aras"}}).then.catch()
+      // User.findall({where: {age: 45, username: "aras"}}).then().catch()
       // User.findAll({ where: { age: 45 }, attributes: ["username"] }) // this only retrieves the username of the data where the age is 45 for the user.
       
       // User.findAll({limit: 2}).then().catch()
 
       // User.findAll({order: [["age", "DESC"]]}).then().catch() // "DESC" and "ASC" mean order them in descending and ascending order respectively.
 
-      // "SUM" could also be "AVG"
+      // "SUM" could also be "AVG", "total" is an alias so total column value will be named as "total"
       attributes: [[sequelize.fn("SUM", sequelize.col(columnName)), "total"]],
     })
     .then((data) => {
-      console.log(data);
+      data.forEach(element => {
+        console.log(element.toJSON());
+      });
     })
     .catch((err) => {
       console.error(err);
