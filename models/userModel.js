@@ -17,6 +17,7 @@ const {
   bulkCreateTableData,
   getAllTableData,
   columTotalValue,
+  aggregateColumnswithSpecificName,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -94,6 +95,8 @@ const User = sequelize.define(
 
 // getAllTableData(User, ["name", "password"]); // second argument is optional
 
-columTotalValue(User, "age");
+// columTotalValue(User, "age");
+
+aggregateColumnswithSpecificName(User, "age", "name"); // Look for the User table, find the same "name" values, only add same "name" values' "age" columns.
 
 module.exports = User;

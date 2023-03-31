@@ -115,7 +115,7 @@ const bulkCreateTableData = (tableModel, bulkData) => {
     .catch((err) => console.error(err));
 };
 
-// findAll method (1/2)
+// findAll method (1/3)
 const getAllTableData = (tableModel, attributeList = []) => {
   let parenthesisObject = { attributes: attributeList }; // {attributes: []} or {attributes: ["name", "password"]}
 
@@ -131,17 +131,17 @@ const getAllTableData = (tableModel, attributeList = []) => {
     });
 };
 
-// findAll method (2/2)
-const columTotalValue = (tableModel, columnName, ) => {
+// findAll method (2/3)
+const columTotalValue = (tableModel, columnName) => {
   tableModel
     .findAll({
       // User.findall({attributes: ["name", "password"]}).then().catch()
       // User.findall({attributes: {exclude: ["password"]}}).then().catch() is another way.
-      
+
       // User.findall({where: {age: 45}}).then.catch() is another way.
       // User.findall({where: {age: 45, username: "aras"}}).then().catch()
       // User.findAll({ where: { age: 45 }, attributes: ["username"] }) // this only retrieves the username of the data where the age is 45 for the user.
-      
+
       // User.findAll({limit: 2}).then().catch()
 
       // User.findAll({order: [["age", "DESC"]]}).then().catch() // "DESC" and "ASC" mean order them in descending and ascending order respectively.
@@ -150,7 +150,29 @@ const columTotalValue = (tableModel, columnName, ) => {
       attributes: [[sequelize.fn("SUM", sequelize.col(columnName)), "total"]],
     })
     .then((data) => {
-      data.forEach(element => {
+      data.forEach((element) => {
+        console.log(element.toJSON());
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// findAll method (3/3)
+// This section will show the total age of the same names,
+// For example it will only add the ages of the same names.
+const aggregateColumnswithSpecificName = (tableModel, addedColumnName, groupColumnName) => {
+  tableModel
+    .findAll({
+      attributes: [
+        groupColumnName,
+        [sequelize.fn("SUM", sequelize.col(addedColumnName)), "total"],
+      ],
+      group: groupColumnName,
+    })
+    .then((data) => {
+      data.forEach((element) => {
         console.log(element.toJSON());
       });
     })
@@ -168,4 +190,5 @@ module.exports = {
   bulkCreateTableData,
   getAllTableData,
   columTotalValue,
+  aggregateColumnswithSpecificName,
 };
