@@ -193,13 +193,27 @@ const aggregateColumnswithSpecificName = (
     });
 };
 
-// or operator
+// or, and operator
 const getUserOrAgewithOrOperator = (tableModel) => {
   tableModel
-    .findAll({ where: { [Op.or]: [{ name: "jordan" }, { age: 12 }] } })
+    .findAll({ where: { [Op.or]: [{ name: "jordan" }, { age: 12 }] } }) // Op.and opearator can also be used
     .then((data) => {
       data.forEach((result) => {
         console.log(result.toJSON());
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// gt operator
+const getUserswithAgeGreaterThan25 = (tableModel) => {
+  tableModel
+    .findAll({where: {age: {[Op.gt]: 25}}})
+    .then((data) => {
+      data.forEach((entry) => {
+        console.log(entry.toJSON());
       });
     })
     .catch((err) => {
@@ -218,4 +232,5 @@ module.exports = {
   columTotalValue,
   aggregateColumnswithSpecificName,
   getUserOrAgewithOrOperator,
+  getUserswithAgeGreaterThan25,
 };

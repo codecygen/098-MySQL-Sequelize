@@ -18,7 +18,8 @@ const {
   getAllTableData,
   columTotalValue,
   aggregateColumnswithSpecificName,
-  getUserOrAgewithOrOperator
+  getUserOrAgewithOrOperator,
+  getUserswithAgeGreaterThan25,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -100,6 +101,8 @@ const User = sequelize.define(
 
 // aggregateColumnswithSpecificName(User, "age", "name"); // Look for the User table, find the same "name" values, only add same "name" values' "age" columns.
 
-getUserOrAgewithOrOperator(User);
+// getUserOrAgewithOrOperator(User);
+
+getUserswithAgeGreaterThan25(User);
 
 module.exports = User;
