@@ -1,3 +1,5 @@
+const { sequelize } = require("./dbConnection");
+
 // build, save, create methods
 const createTableRow = (tableModel, newData) => {
   // creates new data
@@ -113,7 +115,7 @@ const bulkCreateTableData = (tableModel, bulkData) => {
     .catch((err) => console.error(err));
 };
 
-// findAll method
+// findAll method (1/2)
 const getAllTableData = (tableModel, attributeList = []) => {
   let parenthesisObject = { attributes: attributeList }; // {attributes: []} or {attributes: ["name", "password"]}
 
@@ -129,6 +131,31 @@ const getAllTableData = (tableModel, attributeList = []) => {
     });
 };
 
+// findAll method (2/2)
+const columTotalValue = (tableModel, columnName, ) => {
+  tableModel
+    .findAll({
+      // User.findall({attributes: {exclude: ["password"]}}).then.catch() is another way.
+      
+      // User.findall({where: {age: 45}}).then.catch() is another way.
+      // User.findall({where: {age: 45, username: "aras"}}).then.catch()
+      // User.findAll({ where: { age: 45 }, attributes: ["username"] }) // this only retrieves the username of the data where the age is 45 for the user.
+      
+      // User.findAll({limit: 2}).then().catch()
+
+      // User.findAll({order: [["age", "DESC"]]}).then().catch() // "DESC" and "ASC" mean order them in descending and ascending order respectively.
+
+      // "SUM" could also be "AVG"
+      attributes: [[sequelize.fn("SUM", sequelize.col(columnName)), "total"]],
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -137,4 +164,5 @@ module.exports = {
   alterTableNumericValue,
   bulkCreateTableData,
   getAllTableData,
+  columTotalValue,
 };

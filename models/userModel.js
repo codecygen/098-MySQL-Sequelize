@@ -16,6 +16,7 @@ const {
   alterTableNumericValue,
   bulkCreateTableData,
   getAllTableData,
+  columTotalValue,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -91,6 +92,8 @@ const User = sequelize.define(
 
 // bulkCreateTableData(User, newDataSet);
 
-getAllTableData(User, ["name", "password"]); // second argument is optional
+// getAllTableData(User, ["name", "password"]); // second argument is optional
+
+columTotalValue(User, "age");
 
 module.exports = User;
