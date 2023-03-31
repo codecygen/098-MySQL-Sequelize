@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
 // build, save, create methods
@@ -162,8 +163,19 @@ const columTotalValue = (tableModel, columnName) => {
 // findAll method (3/3)
 // This section will show the total age of the same names,
 // For example it will only add the ages of the same names.
-const aggregateColumnswithSpecificName = (tableModel, addedColumnName, groupColumnName) => {
+const aggregateColumnswithSpecificName = (
+  tableModel,
+  addedColumnName,
+  groupColumnName
+) => {
   tableModel
+    // .findAll({
+    //   attributes: [
+    //     "name",
+    //     [sequelize.fn(aggregateName, sequelize.col(columnName)), "total"],
+    //   ],
+    //   group: "name",
+    // })
     .findAll({
       attributes: [
         groupColumnName,
@@ -181,6 +193,20 @@ const aggregateColumnswithSpecificName = (tableModel, addedColumnName, groupColu
     });
 };
 
+// or operator
+const getUserOrAgewithOrOperator = (tableModel) => {
+  tableModel
+    .findAll({ where: { [Op.or]: [{ name: "jordan" }, { age: 12 }] } })
+    .then((data) => {
+      data.forEach((result) => {
+        console.log(result.toJSON());
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -191,4 +217,5 @@ module.exports = {
   getAllTableData,
   columTotalValue,
   aggregateColumnswithSpecificName,
+  getUserOrAgewithOrOperator,
 };
