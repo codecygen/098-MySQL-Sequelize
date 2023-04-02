@@ -45,6 +45,8 @@ const User = sequelize.define(
     name: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
+
+      // defaultValue: "aras",
     },
 
     password: {
@@ -53,6 +55,8 @@ const User = sequelize.define(
       validate: {
         len: [5, 10],
       },
+
+      // defaultValue: "arasaras",
     },
 
     email: {
@@ -61,15 +65,18 @@ const User = sequelize.define(
       // validate: {
       //   len: [1, 25], // Alternative to type: Sequelize.DataTypes.STRING(25)
       // },
+
+      // defaultValue: "aras@email.com",
     },
 
     age: {
       type: Sequelize.DataTypes.INTEGER,
-      // defaultValue: 21
+      // defaultValue: 21,
     },
 
     permission: {
       type: Sequelize.DataTypes.BOOLEAN,
+       // defaultValue: true,
     },
   },
   {
