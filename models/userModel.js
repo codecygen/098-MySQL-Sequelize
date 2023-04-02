@@ -56,8 +56,11 @@ const User = sequelize.define(
     },
 
     email: {
-      type: Sequelize.DataTypes.STRING,
+      type: Sequelize.DataTypes.STRING, // type: Sequelize.DataTypes.STRING(25) means max 25 character, if you want to put it like this
       allowNull: false,
+      // validate: {
+      //   len: [1, 25], // Alternative to type: Sequelize.DataTypes.STRING(25)
+      // },
     },
 
     age: {
