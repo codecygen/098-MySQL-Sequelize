@@ -287,6 +287,32 @@ const deleteEntriesWithNameWow = (tableModel) => {
     });
 };
 
+// max method
+// max("age", { where: { age: 21 } }) // this method can also take where as a parameter
+const maxAge = (tableModel) => {
+  tableModel
+    .max("age")
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// sum method
+// sum("age", { where: { age: 21 } }) // this method can also take where as a parameter
+const totalAge = (tableModel) => {
+  tableModel
+    .sum("age")
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -302,4 +328,6 @@ module.exports = {
   findNamesWithCertainLength,
   updateNameIfAgeisMoreThan20,
   deleteEntriesWithNameWow,
+  maxAge,
+  totalAge,
 };
