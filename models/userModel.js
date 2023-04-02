@@ -21,7 +21,8 @@ const {
   getUserOrAgewithOrOperator,
   getUserswithAgeinBetween23and40,
   findNamesWithCertainLength,
-  updateNameIfAgeisMoreThan20
+  updateNameIfAgeisMoreThan20,
+  deleteEntriesWithNameWow,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -109,6 +110,8 @@ const User = sequelize.define(
 
 // findNamesWithCertainLength(User);
 
-updateNameIfAgeisMoreThan20(User);
+// updateNameIfAgeisMoreThan20(User);
+
+deleteEntriesWithNameWow(User);
 
 module.exports = User;

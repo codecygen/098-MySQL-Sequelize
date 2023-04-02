@@ -272,6 +272,21 @@ const updateNameIfAgeisMoreThan20 = (tableModel) => {
     });
 };
 
+// destroy method,
+// if you want to delete all entries simply use
+// destroy() or // this option will log each individial delete events to console
+// destroy({ truncate: true }) // this is only useful if you have a large content in database and don't need any console log.
+const deleteEntriesWithNameWow = (tableModel) => {
+  tableModel
+    .destroy({ where: { name: "Wow" } })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -286,4 +301,5 @@ module.exports = {
   getUserswithAgeinBetween23and40,
   findNamesWithCertainLength,
   updateNameIfAgeisMoreThan20,
+  deleteEntriesWithNameWow,
 };
