@@ -147,7 +147,8 @@ const columTotalValue = (tableModel, columnName) => {
 
       // User.findAll({order: [["age", "DESC"]]}).then().catch() // "DESC" and "ASC" mean order them in descending and ascending order respectively.
 
-      // "SUM" could also be "AVG", "total" is an alias so total column value will be named as "total"
+      // "SUM", "AVG", "MAX", "MIN", "COUNT", 
+      // "total" is an alias so total column value will be named as "total"
       attributes: [[sequelize.fn("SUM", sequelize.col(columnName)), "total"]],
     })
     .then((data) => {
@@ -181,7 +182,7 @@ const aggregateColumnswithSpecificName = (
     // .findAll({
     //   attributes: [
     //     "name",
-    //     [sequelize.fn("SUM", sequelize.col("age")), "total"],
+    //     [sequelize.fn("SUM", sequelize.col("age")), "total"], // ---------------- "SUM", "AVG", "MAX", "MIN", "COUNT"
     //   ],
     //   group: "name",
     // })
