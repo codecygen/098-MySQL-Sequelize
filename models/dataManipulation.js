@@ -163,6 +163,15 @@ const columTotalValue = (tableModel, columnName) => {
 // findAll method (3/3)
 // This section will show the total age of the same names,
 // For example it will only add the ages of the same names.
+
+// Here, all names' age will be added up as per their respective name's
+// total age of the respective names will be calculated and the result will
+// show with title "total" for the total ages. Example output:
+// { name: 'jordan', total: '12' }
+// { name: 'newdude', total: '38' }
+// { name: 'aras', total: '23' }
+// { name: 'aras2', total: '45' }
+// { name: 'aras5', total: '11' }
 const aggregateColumnswithSpecificName = (
   tableModel,
   addedColumnName,
@@ -172,7 +181,7 @@ const aggregateColumnswithSpecificName = (
     // .findAll({
     //   attributes: [
     //     "name",
-    //     [sequelize.fn(aggregateName, sequelize.col(columnName)), "total"],
+    //     [sequelize.fn("SUM", sequelize.col("age")), "total"],
     //   ],
     //   group: "name",
     // })
@@ -207,14 +216,56 @@ const getUserOrAgewithOrOperator = (tableModel) => {
     });
 };
 
-// gt operator
-const getUserswithAgeGreaterThan25 = (tableModel) => {
+// (gt, eq, or, lt) operators are all working with similar logic
+const getUserswithAgeinBetween23and40 = (tableModel) => {
   tableModel
-    .findAll({where: {age: {[Op.gt]: 25}}})
+    .findAll({
+      where: {
+        age: {
+          [Op.and]: {
+            [Op.gt]: 23,
+            [Op.lt]: 40,
+          },
+        },
+      },
+    })
     .then((data) => {
       data.forEach((entry) => {
         console.log(entry.toJSON());
       });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// Find names that has 5 characters.
+// sequelize.where method
+const findNamesWithCertainLength = (tableModel) => {
+  tableModel
+    .findAll({
+      where: sequelize.where(
+        sequelize.fn("char_length", sequelize.col("name")),
+        5
+      ),
+    })
+    .then((data) => {
+      data.forEach((entry) => {
+        console.log(entry.toJSON());
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// Change name to "Yes!" if the age is more than 20.
+// update method
+const updateNameIfAgeisMoreThan20 = (tableModel) => {
+  tableModel
+    .update({ name: "Wow" }, { where: { age: { [Op.gt]: 20 } } })
+    .then((data) => {
+      console.log(data);
     })
     .catch((err) => {
       console.error(err);
@@ -232,5 +283,7 @@ module.exports = {
   columTotalValue,
   aggregateColumnswithSpecificName,
   getUserOrAgewithOrOperator,
-  getUserswithAgeGreaterThan25,
+  getUserswithAgeinBetween23and40,
+  findNamesWithCertainLength,
+  updateNameIfAgeisMoreThan20,
 };

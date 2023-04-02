@@ -19,7 +19,9 @@ const {
   columTotalValue,
   aggregateColumnswithSpecificName,
   getUserOrAgewithOrOperator,
-  getUserswithAgeGreaterThan25,
+  getUserswithAgeinBetween23and40,
+  findNamesWithCertainLength,
+  updateNameIfAgeisMoreThan20
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -103,6 +105,10 @@ const User = sequelize.define(
 
 // getUserOrAgewithOrOperator(User);
 
-getUserswithAgeGreaterThan25(User);
+// getUserswithAgeinBetween23and40(User);
+
+// findNamesWithCertainLength(User);
+
+updateNameIfAgeisMoreThan20(User);
 
 module.exports = User;

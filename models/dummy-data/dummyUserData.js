@@ -1,8 +1,8 @@
 const newData = {
-  name: "aras",
+  name: "aras5",
   password: "useraras",
   email: "aras@gmail.com",
-  age: 23,
+  age: 11,
   permission: true,
 };
 
