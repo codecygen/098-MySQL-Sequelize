@@ -29,6 +29,7 @@ const {
   findByIndex,
   findOneEntry,
   findOrCreateEntry,
+  findAndCountTable,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -140,6 +141,8 @@ const User = sequelize.define(
 
 // findOneEntry(User);
 
-findOrCreateEntry(User);
+// findOrCreateEntry(User);
+
+findAndCountTable(User);
 
 module.exports = User;

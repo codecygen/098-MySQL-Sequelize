@@ -357,11 +357,25 @@ const findOneEntry = (tableModel) => {
 const findOrCreateEntry = (tableModel) => {
   tableModel
     // defaults keyword is used to overwrite the userModel.js model creation defaultValue section of the age.
-    .findOrCreate({ where: { name: "newdude" }, /* defaults: { age: 76 } */ }) // because we have default values of password, email and other properties defined in userModel.js, they are auto added if name "newdude" is non-existent in database
+    .findOrCreate({ where: { name: "newdude" } /* defaults: { age: 76 } */ }) // because we have default values of password, email and other properties defined in userModel.js, they are auto added if name "newdude" is non-existent in database
     .then((data) => {
       const [result, isCreated] = data;
       // console.log(result);
       console.log(isCreated);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// findAndCountAll method
+const findAndCountTable = (tableModel) => {
+  tableModel
+    .findAndCountAll({ where: { name: "newdude" }, raw: true })
+    .then((data) => {
+      const { count, rows } = data;
+      console.log(count);
+      console.log(rows);
     })
     .catch((err) => {
       console.error(err);
@@ -389,4 +403,5 @@ module.exports = {
   findByIndex,
   findOneEntry,
   findOrCreateEntry,
+  findAndCountTable,
 };
