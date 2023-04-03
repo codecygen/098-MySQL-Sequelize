@@ -69,7 +69,7 @@ const User = sequelize.define(
 
       defaultValue: "arasaras",
 
-      set(rawPassword) {
+      /* async */  set(rawPassword) {
         bcrypt.hash(rawPassword, 12)
           .then((hashedPassword) => {
             console.log(hashedPassword);
@@ -78,6 +78,14 @@ const User = sequelize.define(
           .catch((err) => {
             console.error(err);
           });
+
+        // try {
+        //   const hashedPassword = await bcrypt.hash(rawPassword, 12);
+        //   console.log(hashedPassword);
+        //   this.setDataValue("password", hashedPassword);
+        // } catch (err) {
+        //   console.error(err);
+        // }
       },
     },
 
