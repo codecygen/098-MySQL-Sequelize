@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
+const { hash } = require("bcrypt");
+
 const {
   newData,
   longPassData,
@@ -66,6 +68,17 @@ const User = sequelize.define(
       },
 
       defaultValue: "arasaras",
+
+      set(rawPassword) {
+        bcrypt.hash(rawPassword, 12)
+          .then((hashedPassword) => {
+            console.log(hashedPassword);
+            this.setDataValue("password", hashedPassword);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      },
     },
 
     email: {
