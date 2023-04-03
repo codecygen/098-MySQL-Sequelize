@@ -126,6 +126,7 @@ const getAllTableData = (tableModel, attributeList = []) => {
     .then((allTableData) => {
       allTableData.forEach((element) => {
         console.log(element.toJSON());
+         // console.log(element.name); this will display "name" keyword without using toJSON() method.
       });
     })
     .catch((err) => {
@@ -169,6 +170,7 @@ const columTotalValue = (tableModel, columnName) => {
     .then((data) => {
       data.forEach((element) => {
         console.log(element.toJSON());
+         // console.log(element.name); this will display "name" keyword without using toJSON() method.
       });
     })
     .catch((err) => {
@@ -211,6 +213,7 @@ const aggregateColumnswithSpecificName = (
     .then((data) => {
       data.forEach((element) => {
         console.log(element.toJSON());
+         // console.log(element.name); this will display "name" keyword without using toJSON() method.
       });
     })
     .catch((err) => {
@@ -225,6 +228,7 @@ const getUserOrAgewithOrOperator = (tableModel) => {
     .then((data) => {
       data.forEach((result) => {
         console.log(result.toJSON());
+         // console.log(result.name); this will display "name" keyword without using toJSON() method.
       });
     })
     .catch((err) => {
@@ -248,6 +252,7 @@ const getUserswithAgeinBetween23and40 = (tableModel) => {
     .then((data) => {
       data.forEach((entry) => {
         console.log(entry.toJSON());
+         // console.log(entry.name); this will display "name" keyword without using toJSON() method.
       });
     })
     .catch((err) => {
@@ -268,6 +273,7 @@ const findNamesWithCertainLength = (tableModel) => {
     .then((data) => {
       data.forEach((entry) => {
         console.log(entry.toJSON());
+         // console.log(entry.name); this will display "name" keyword without using toJSON() method.
       });
     })
     .catch((err) => {
@@ -335,6 +341,7 @@ const findByIndex = (tableModel, indexNumber) => {
     .findByPk(indexNumber /* { raw: true } */)
     .then((data) => {
       console.log(data.toJSON()); // or console.log(data);
+       // console.log(data.name); this will display "name" keyword without using toJSON() method.
     })
     .catch((err) => {
       console.error(err);
@@ -347,6 +354,7 @@ const findOneEntry = (tableModel) => {
     .findOne({ where: { id: 6 } }) // if findOne(), it only finds the first instance of the table
     .then((data) => {
       console.log(data.toJSON());
+      // console.log(data.name); this will display "name" keyword without using toJSON() method.
     })
     .catch((err) => {
       console.error(err);
@@ -382,6 +390,24 @@ const findAndCountTable = (tableModel) => {
     });
 };
 
+// getter function in userModel.js, lets see how it effects our output now!
+// check "name" section of userModel.js
+
+// get() {
+//   const rawValue = this.getDataValue("name");
+//   return rawValue.toUpperCase();
+// }
+const getterFunctionTest = (tableModel) => {
+  tableModel
+    .findOne({ where: { name: "aras5" } })
+    .then((foundEntry) => {
+      console.log(foundEntry.name); // will print uppercased version of the database name
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -404,4 +430,5 @@ module.exports = {
   findOneEntry,
   findOrCreateEntry,
   findAndCountTable,
+  getterFunctionTest,
 };

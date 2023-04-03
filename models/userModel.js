@@ -30,6 +30,7 @@ const {
   findOneEntry,
   findOrCreateEntry,
   findAndCountTable,
+  getterFunctionTest,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -50,8 +51,11 @@ const User = sequelize.define(
     name: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
-
-      // defaultValue: "aras",
+      defaultValue: "aras",
+      get() {
+        const rawValue = this.getDataValue("name");
+        return rawValue.toUpperCase();
+      },
     },
 
     password: {
@@ -143,6 +147,8 @@ const User = sequelize.define(
 
 // findOrCreateEntry(User);
 
-findAndCountTable(User);
+// findAndCountTable(User);
+
+getterFunctionTest(User);
 
 module.exports = User;
