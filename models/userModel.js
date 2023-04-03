@@ -27,6 +27,8 @@ const {
   maxAge,
   totalAge,
   findByIndex,
+  findOneEntry,
+  findOrCreateEntry,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -58,7 +60,7 @@ const User = sequelize.define(
         len: [5, 10],
       },
 
-      // defaultValue: "arasaras",
+      defaultValue: "arasaras",
     },
 
     email: {
@@ -68,17 +70,17 @@ const User = sequelize.define(
       //   len: [1, 25], // Alternative to type: Sequelize.DataTypes.STRING(25)
       // },
 
-      // defaultValue: "aras@email.com",
+      defaultValue: "aras@email.com",
     },
 
     age: {
       type: Sequelize.DataTypes.INTEGER,
-      // defaultValue: 21,
+      defaultValue: 21,
     },
 
     permission: {
       type: Sequelize.DataTypes.BOOLEAN,
-      // defaultValue: true,
+      defaultValue: true,
     },
   },
   {
@@ -134,6 +136,10 @@ const User = sequelize.define(
 
 // totalAge(User);
 
-findByIndex(User, 2);
+// findByIndex(User, 2);
+
+// findOneEntry(User);
+
+findOrCreateEntry(User);
 
 module.exports = User;

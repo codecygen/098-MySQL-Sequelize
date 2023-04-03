@@ -3,7 +3,7 @@ const { sequelize } = require("./dbConnection");
 
 // build, save, create methods
 const createTableRow = (tableModel, newData) => {
-  // creates new data
+  // only creates new data
   // const user = User.build({
   //   name: "aras",
   //   password: "useraras",
@@ -12,7 +12,7 @@ const createTableRow = (tableModel, newData) => {
   //   permission: true
   // });
 
-  // saves new data to MySQL
+  // only saves new data to MySQL
   // user.save()
   //   .then(result => {
   //     console.log("User saved to the database:", result);
@@ -21,7 +21,8 @@ const createTableRow = (tableModel, newData) => {
   //     console.error("Error saving user to the database:", err);
   //   });
 
-  // instead of const user = User.build, user.save
+  // instead of const user = User.build, user.save,
+  // create method does the job of build and save combined
   tableModel
     .create(newData) // directly saves data to MySQL, newData is an object
     .then((result) => {
@@ -331,9 +332,33 @@ const totalAge = (tableModel) => {
 // findByPk method
 const findByIndex = (tableModel, indexNumber) => {
   tableModel
-    .findByPk(indexNumber, /* { raw: true } */)
+    .findByPk(indexNumber /* { raw: true } */)
     .then((data) => {
       console.log(data.toJSON()); // or console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// findOne method
+const findOneEntry = (tableModel) => {
+  tableModel
+    .findOne({ where: { id: 6 } }) // if findOne(), it only finds the first instance of the table
+    .then((data) => {
+      console.log(data.toJSON());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// findOrCreate method
+const findOrCreateEntry = (tableModel) => {
+  tableModel
+    .findOrCreate({ where: { name: "newdude" } }) // because we have default values of password, email and other properties defined in userModel.js, they are auto added if name "newdude" is non-existent in database
+    .then((data) => {
+      console.log(data);
     })
     .catch((err) => {
       console.error(err);
@@ -359,4 +384,6 @@ module.exports = {
   maxAge,
   totalAge,
   findByIndex,
+  findOneEntry,
+  findOrCreateEntry,
 };
