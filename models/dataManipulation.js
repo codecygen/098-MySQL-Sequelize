@@ -116,7 +116,7 @@ const bulkCreateTableData = (tableModel, bulkData) => {
     .catch((err) => console.error(err));
 };
 
-// findAll method (1/3)
+// findAll method (1/4)
 const getAllTableData = (tableModel, attributeList = []) => {
   let parenthesisObject = { attributes: attributeList }; // {attributes: []} or {attributes: ["name", "password"]}
 
@@ -133,6 +133,20 @@ const getAllTableData = (tableModel, attributeList = []) => {
 };
 
 // findAll method (2/3)
+// raw: true // returns only the raw data instead of the response object
+// in then() block.
+const getRawTableData = (tableModel) => {
+  tableModel
+    .findAll({ raw: true }) // ({where: { age: 25 }, raw: true}) // this is also valid
+    .then((allTableData) => {
+      console.log(allTableData);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// findAll method (3/4)
 const columTotalValue = (tableModel, columnName) => {
   tableModel
     .findAll({
@@ -147,7 +161,7 @@ const columTotalValue = (tableModel, columnName) => {
 
       // User.findAll({order: [["age", "DESC"]]}).then().catch() // "DESC" and "ASC" mean order them in descending and ascending order respectively.
 
-      // "SUM", "AVG", "MAX", "MIN", "COUNT", 
+      // "SUM", "AVG", "MAX", "MIN", "COUNT",
       // "total" is an alias so total column value will be named as "total"
       attributes: [[sequelize.fn("SUM", sequelize.col(columnName)), "total"]],
     })
@@ -161,7 +175,7 @@ const columTotalValue = (tableModel, columnName) => {
     });
 };
 
-// findAll method (3/3)
+// findAll method (4/4)
 // This section will show the total age of the same names,
 // For example it will only add the ages of the same names.
 
@@ -314,6 +328,18 @@ const totalAge = (tableModel) => {
     });
 };
 
+// findByPk method
+const findByIndex = (tableModel, indexNumber) => {
+  tableModel
+    .findByPk(indexNumber, /* { raw: true } */)
+    .then((data) => {
+      console.log(data.toJSON()); // or console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -322,6 +348,7 @@ module.exports = {
   alterTableNumericValue,
   bulkCreateTableData,
   getAllTableData,
+  getRawTableData,
   columTotalValue,
   aggregateColumnswithSpecificName,
   getUserOrAgewithOrOperator,
@@ -331,4 +358,5 @@ module.exports = {
   deleteEntriesWithNameWow,
   maxAge,
   totalAge,
+  findByIndex,
 };

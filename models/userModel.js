@@ -16,6 +16,7 @@ const {
   alterTableNumericValue,
   bulkCreateTableData,
   getAllTableData,
+  getRawTableData,
   columTotalValue,
   aggregateColumnswithSpecificName,
   getUserOrAgewithOrOperator,
@@ -25,6 +26,7 @@ const {
   deleteEntriesWithNameWow,
   maxAge,
   totalAge,
+  findByIndex,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -76,7 +78,7 @@ const User = sequelize.define(
 
     permission: {
       type: Sequelize.DataTypes.BOOLEAN,
-       // defaultValue: true,
+      // defaultValue: true,
     },
   },
   {
@@ -112,6 +114,8 @@ const User = sequelize.define(
 
 // getAllTableData(User, ["name", "password"]); // second argument is optional
 
+// getRawTableData(User);
+
 // columTotalValue(User, "age");
 
 // aggregateColumnswithSpecificName(User, "age", "name"); // Look for the User table, find the same "name" values, only add same "name" values' "age" columns.
@@ -128,6 +132,8 @@ const User = sequelize.define(
 
 // maxAge(User);
 
-totalAge(User);
+// totalAge(User);
+
+findByIndex(User, 2);
 
 module.exports = User;
