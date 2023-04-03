@@ -356,9 +356,12 @@ const findOneEntry = (tableModel) => {
 // findOrCreate method
 const findOrCreateEntry = (tableModel) => {
   tableModel
-    .findOrCreate({ where: { name: "newdude" } }) // because we have default values of password, email and other properties defined in userModel.js, they are auto added if name "newdude" is non-existent in database
+    // defaults keyword is used to overwrite the userModel.js model creation defaultValue section of the age.
+    .findOrCreate({ where: { name: "newdude" }, /* defaults: { age: 76 } */ }) // because we have default values of password, email and other properties defined in userModel.js, they are auto added if name "newdude" is non-existent in database
     .then((data) => {
-      console.log(data);
+      const [result, isCreated] = data;
+      // console.log(result);
+      console.log(isCreated);
     })
     .catch((err) => {
       console.error(err);
