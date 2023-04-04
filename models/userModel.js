@@ -71,6 +71,7 @@ const User = sequelize.define(
 
       defaultValue: "arasaras",
 
+      // enteredPassword argument is automatically passed as whatever the password is entered for new user creation.
       set(enteredPassword) { // setter and getter functions can only use syncronous methods.
         const salt = bcrypt.genSaltSync(12);
         const hashedPassword = bcrypt.hashSync(enteredPassword, salt);
@@ -100,8 +101,18 @@ const User = sequelize.define(
 
     description: {
       type: Sequelize.DataTypes.STRING,
-      set(enteredDescription) { // setter and getter functions can only use syncronous methods.
 
+      // enteredDescription argument is automatically passed as whatever the description is entered for new user creation.
+      set(enteredDescription) { // setter and getter functions can only use syncronous methods.
+        const compressedDescription = zlib.deflateSync(enteredDescription).toString("base64");
+        this.setDataValue("description", compressedDescription);
+      },
+      
+      get() { // setter and getter functions can only use syncronous methods.
+        const compressedDescription = this.getDataValue("description"); // "description" is the field in database
+        const enteredDescription = zlib.inflateSync(Buffer.from(compressedDescription, "base64"));
+
+        
       }
     },
   },
