@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
 const bcrypt = require("bcrypt");
+const zlib = require("zlib");
 
 const {
   newData,
@@ -55,7 +56,7 @@ const User = sequelize.define(
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
       defaultValue: "aras",
-      get() {
+      get() { // setter and getter functions can only use syncronous methods.
         const rawValue = this.getDataValue("name"); // "name" is the field in database
         return rawValue.toUpperCase();
       },
@@ -70,9 +71,9 @@ const User = sequelize.define(
 
       defaultValue: "arasaras",
 
-      set(enteredPassword) {
+      set(enteredPassword) { // setter and getter functions can only use syncronous methods.
         const salt = bcrypt.genSaltSync(12);
-        const hashedPassword = bcrypt.hashSync(enteredPassword, salt)
+        const hashedPassword = bcrypt.hashSync(enteredPassword, salt);
         this.setDataValue("password", hashedPassword); // "password" is the field in database
       },
     },
@@ -95,6 +96,13 @@ const User = sequelize.define(
     permission: {
       type: Sequelize.DataTypes.BOOLEAN,
       defaultValue: true,
+    },
+
+    description: {
+      type: Sequelize.DataTypes.STRING,
+      set(enteredDescription) { // setter and getter functions can only use syncronous methods.
+
+      }
     },
   },
   {
@@ -160,6 +168,6 @@ const User = sequelize.define(
 
 // getterFunctionTest(User);
 
-setterFunctionTest(User, newData);
+// setterFunctionTest(User, newData);
 
 module.exports = User;

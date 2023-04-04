@@ -10,3 +10,6 @@ HOST="localhost"
 PORT=3306
 ```
 - Use "**npm i**", then "**npm start**" to start the server.
+
+# Additional Notes:
+- zlib and bcrypt used for this project.

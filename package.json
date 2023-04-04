@@ -15,6 +15,7 @@
     "gitignore": "^0.7.0",
     "mysql2": "^3.2.0",
     "nodemon": "^2.0.22",
-    "sequelize": "^6.30.0"
+    "sequelize": "^6.30.0",
+    "zlib": "^1.0.5"
   }
 }
