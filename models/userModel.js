@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
-const { hash } = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 const {
   newData,
@@ -33,6 +33,7 @@ const {
   findOrCreateEntry,
   findAndCountTable,
   getterFunctionTest,
+  setterFunctionTest,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -55,7 +56,7 @@ const User = sequelize.define(
       allowNull: false,
       defaultValue: "aras",
       get() {
-        const rawValue = this.getDataValue("name");
+        const rawValue = this.getDataValue("name"); // "name" is the field in database
         return rawValue.toUpperCase();
       },
     },
@@ -63,29 +64,16 @@ const User = sequelize.define(
     password: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [5, 10],
-      },
+      // validate: {
+      //   len: [5, 10],
+      // },
 
       defaultValue: "arasaras",
 
-      /* async */  set(rawPassword) {
-        bcrypt.hash(rawPassword, 12)
-          .then((hashedPassword) => {
-            console.log(hashedPassword);
-            this.setDataValue("password", hashedPassword);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-
-        // try {
-        //   const hashedPassword = await bcrypt.hash(rawPassword, 12);
-        //   console.log(hashedPassword);
-        //   this.setDataValue("password", hashedPassword);
-        // } catch (err) {
-        //   console.error(err);
-        // }
+      set(enteredPassword) {
+        const salt = bcrypt.genSaltSync(12);
+        const hashedPassword = bcrypt.hashSync(enteredPassword, salt)
+        this.setDataValue("password", hashedPassword); // "password" is the field in database
       },
     },
 
@@ -170,6 +158,8 @@ const User = sequelize.define(
 
 // findAndCountTable(User);
 
-getterFunctionTest(User);
+// getterFunctionTest(User);
+
+setterFunctionTest(User, newData);
 
 module.exports = User;
