@@ -408,6 +408,14 @@ const getterFunctionTest = (tableModel) => {
     });
 };
 
+// setter function in userModel.js, lets see how it effects our output now!
+// check "password" section of userModel.js
+
+// set(enteredPassword) {
+//   const salt = bcrypt.genSaltSync(12);
+//   const hashedPassword = bcrypt.hashSync(enteredPassword, salt)
+//   this.setDataValue("password", hashedPassword); // "password" is the field in database
+// }
 const setterFunctionTest = (tableModel, newDataObj) => {
   tableModel
     .create(newDataObj)
