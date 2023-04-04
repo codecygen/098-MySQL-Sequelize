@@ -421,7 +421,7 @@ const setterFunctionTest = (tableModel, newDataObj) => {
     .create(newDataObj)
     .then((result) => {
       console.log(result.toJSON());
-      console.log("name", result.name);
+      console.log("name:", result.name);
       console.log("password: ", result.password);
     })
     .catch((err) => {
