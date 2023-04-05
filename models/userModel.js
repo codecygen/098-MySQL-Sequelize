@@ -37,6 +37,7 @@ const {
   setterFunctionTest,
   descriptionSetter,
   descriptionGetter,
+  combineNameAndDescription,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -118,10 +119,19 @@ const User = sequelize.define(
       get() {
         // setter and getter functions can only use syncronous methods.
         const compressedDescription = this.getDataValue("description"); // "description" is the field in database
-        const enteredDescription = zlib.inflateSync(
-          Buffer.from(compressedDescription, "base64")
-        ).toString();
+        const enteredDescription = zlib
+          .inflateSync(Buffer.from(compressedDescription, "base64"))
+          .toString();
         return enteredDescription;
+      },
+    },
+
+    // this section will be used to retrieve name and description of a user
+    nameAndDescription: {
+      type: Sequelize.DataTypes.VIRTUAL,
+      get() {
+        // setter and getter functions can only use syncronous methods.
+        return `name: ${this.name}\ndescription: ${this.description}`;
       },
     },
   },
@@ -181,16 +191,17 @@ const User = sequelize.define(
 // findByIndex(User, 2);
 
 // findOneEntry(User);,
-  id: 35,
+id: 35,
+  // findAndCountTable(User);
 
-// findAndCountTable(User);
+  // getterFunctionTest(User);
 
-// getterFunctionTest(User);
+  // setterFunctionTest(User, newData);
 
-// setterFunctionTest(User, newData);
+  // descriptionSetter(User); // uses setter function in this file's description section for the user model to compress the description
 
-// descriptionSetter(User); // uses setter function in this file's description section for the user model to compress the description
+  // descriptionGetter(User); // uses getter function in this file's description section for the user model and uncompresses the description
 
-// descriptionGetter(User); // uses getter function in this file's description section for the user model and uncompresses the description
-
-module.exports = User;
+  // combineNameAndDescription(User);
+  
+  (module.exports = User);

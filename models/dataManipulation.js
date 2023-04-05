@@ -454,11 +454,36 @@ const descriptionSetter = (tableModel) => {
     });
 };
 
+// setter function in userModel.js, lets see how it effects our output now!
+// check "description" section of userModel.js
+
+// get() {
+//   // setter and getter functions can only use syncronous methods.
+//   const compressedDescription = this.getDataValue("description"); // "description" is the field in database
+//   const enteredDescription = zlib
+//     .inflateSync(Buffer.from(compressedDescription, "base64"))
+//     .toString();
+//   return enteredDescription;
+// },
 const descriptionGetter = (tableModel) => {
   tableModel
     .findOne({ where: { name: "totalNew" } })
     .then((foundEntry) => {
       console.log(foundEntry.toJSON());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+// This function uses the getter function in "nameAndDescription" section in userModel.js
+// nameAndDescription basically does a simple string concatenation to
+// combine name and description of a user in database.
+const combineNameAndDescription = (tableModel) => {
+  tableModel
+    .findOne({ where: { name: "totalNew" } })
+    .then((foundEntry) => {
+      console.log(foundEntry.nameAndDescription);
     })
     .catch((err) => {
       console.error(err);
@@ -491,4 +516,5 @@ module.exports = {
   setterFunctionTest,
   descriptionSetter,
   descriptionGetter,
+  combineNameAndDescription,
 };
