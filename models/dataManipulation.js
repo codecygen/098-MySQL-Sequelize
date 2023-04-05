@@ -429,6 +429,42 @@ const setterFunctionTest = (tableModel, newDataObj) => {
     });
 };
 
+// setter function in userModel.js, lets see how it effects our output now!
+// check "description" section of userModel.js
+
+// set(enteredDescription) { // setter and getter functions can only use syncronous methods.
+//   const compressedDescription = zlib.deflateSync(enteredDescription).toString("base64");
+//   this.setDataValue("description", compressedDescription);
+// },
+const descriptionSetter = (tableModel) => {
+  tableModel
+    .create({
+      name: "totalNew",
+      password: "somepass",
+      description: "This is a description about this new user!",
+    })
+    .then((result) => {
+      console.log(result.toJSON());
+      console.log(data.name);
+      console.log(data.password);
+      console.log(data.description);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const descriptionGetter = (tableModel) => {
+  tableModel
+    .findOne({ where: { name: "totalNew" } })
+    .then((foundEntry) => {
+      console.log(foundEntry.toJSON());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -453,4 +489,6 @@ module.exports = {
   findAndCountTable,
   getterFunctionTest,
   setterFunctionTest,
+  descriptionSetter,
+  descriptionGetter,
 };

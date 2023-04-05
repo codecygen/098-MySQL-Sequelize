@@ -35,6 +35,8 @@ const {
   findAndCountTable,
   getterFunctionTest,
   setterFunctionTest,
+  descriptionSetter,
+  descriptionGetter,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -56,7 +58,8 @@ const User = sequelize.define(
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
       defaultValue: "aras",
-      get() { // setter and getter functions can only use syncronous methods.
+      get() {
+        // setter and getter functions can only use syncronous methods.
         const rawValue = this.getDataValue("name"); // "name" is the field in database
         return rawValue.toUpperCase();
       },
@@ -72,7 +75,8 @@ const User = sequelize.define(
       defaultValue: "arasaras",
 
       // enteredPassword argument is automatically passed as whatever the password is entered for new user creation.
-      set(enteredPassword) { // setter and getter functions can only use syncronous methods.
+      set(enteredPassword) {
+        // setter and getter functions can only use syncronous methods.
         const salt = bcrypt.genSaltSync(12);
         const hashedPassword = bcrypt.hashSync(enteredPassword, salt);
         this.setDataValue("password", hashedPassword); // "password" is the field in database
@@ -103,17 +107,22 @@ const User = sequelize.define(
       type: Sequelize.DataTypes.STRING,
 
       // enteredDescription argument is automatically passed as whatever the description is entered for new user creation.
-      set(enteredDescription) { // setter and getter functions can only use syncronous methods.
-        const compressedDescription = zlib.deflateSync(enteredDescription).toString("base64");
+      set(enteredDescription) {
+        // setter and getter functions can only use syncronous methods.
+        const compressedDescription = zlib
+          .deflateSync(enteredDescription)
+          .toString("base64");
         this.setDataValue("description", compressedDescription);
       },
-      
-      get() { // setter and getter functions can only use syncronous methods.
-        const compressedDescription = this.getDataValue("description"); // "description" is the field in database
-        const enteredDescription = zlib.inflateSync(Buffer.from(compressedDescription, "base64"));
 
-        
-      }
+      get() {
+        // setter and getter functions can only use syncronous methods.
+        const compressedDescription = this.getDataValue("description"); // "description" is the field in database
+        const enteredDescription = zlib.inflateSync(
+          Buffer.from(compressedDescription, "base64")
+        ).toString();
+        return enteredDescription;
+      },
     },
   },
   {
@@ -171,14 +180,17 @@ const User = sequelize.define(
 
 // findByIndex(User, 2);
 
-// findOneEntry(User);
-
-// findOrCreateEntry(User);
+// findOneEntry(User);,
+  id: 35,
 
 // findAndCountTable(User);
 
 // getterFunctionTest(User);
 
 // setterFunctionTest(User, newData);
+
+// descriptionSetter(User); // uses setter function in this file's description section for the user model to compress the description
+
+// descriptionGetter(User); // uses getter function in this file's description section for the user model and uncompresses the description
 
 module.exports = User;
