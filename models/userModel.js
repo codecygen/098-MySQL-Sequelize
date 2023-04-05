@@ -38,6 +38,7 @@ const {
   descriptionSetter,
   descriptionGetter,
   combineNameAndDescription,
+  createUniqueCitizenshipId,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -91,12 +92,20 @@ const User = sequelize.define(
       //   len: [1, 25], // Alternative to type: Sequelize.DataTypes.STRING(25)
       // },
 
-      defaultValue: "aras@email.com",
+      defaultValue: `aras@email.com`,
     },
 
     age: {
       type: Sequelize.DataTypes.INTEGER,
       defaultValue: 21,
+    },
+
+    citizenshipNumber: {
+      type: Sequelize.DataTypes.BIGINT,
+      unique: true,
+      defaultValue: Math.abs(
+        Math.floor(Math.random() * 1e14) - Math.floor(Math.random() * 1e13) * 10
+      ),
     },
 
     permission: {
@@ -124,6 +133,8 @@ const User = sequelize.define(
           .toString();
         return enteredDescription;
       },
+
+      defaultValue: "A new dude in the village"
     },
 
     // this section will be used to retrieve name and description of a user
@@ -203,6 +214,8 @@ const User = sequelize.define(
 
 // descriptionGetter(User); // uses getter function in this file's description section for the user model and uncompresses the description
 
-combineNameAndDescription(User);
-  
-(module.exports = User);
+// combineNameAndDescription(User);
+
+createUniqueCitizenshipId(User);
+
+module.exports = User;

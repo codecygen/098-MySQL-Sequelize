@@ -490,6 +490,19 @@ const combineNameAndDescription = (tableModel) => {
     });
 };
 
+const createUniqueCitizenshipId = (tableModel) => {
+  tableModel
+    .create({
+      name: "dude1",
+    })
+    .then((foundEntry) => {
+      console.log(foundEntry.toJSON());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -517,4 +530,5 @@ module.exports = {
   descriptionSetter,
   descriptionGetter,
   combineNameAndDescription,
+  createUniqueCitizenshipId,
 };
