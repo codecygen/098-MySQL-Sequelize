@@ -191,17 +191,17 @@ const User = sequelize.define(
 // findByIndex(User, 2);
 
 // findOneEntry(User);,
-id: 35,
-  // findAndCountTable(User);
 
-  // getterFunctionTest(User);
+// findAndCountTable(User);
 
-  // setterFunctionTest(User, newData);
+// getterFunctionTest(User);
 
-  // descriptionSetter(User); // uses setter function in this file's description section for the user model to compress the description
+// setterFunctionTest(User, newData);
 
-  // descriptionGetter(User); // uses getter function in this file's description section for the user model and uncompresses the description
+// descriptionSetter(User); // uses setter function in this file's description section for the user model to compress the description
 
-  // combineNameAndDescription(User);
+// descriptionGetter(User); // uses getter function in this file's description section for the user model and uncompresses the description
+
+combineNameAndDescription(User);
   
-  (module.exports = User);
+(module.exports = User);
