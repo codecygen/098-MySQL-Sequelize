@@ -128,6 +128,7 @@ const User = sequelize.define(
 
     // this section will be used to retrieve name and description of a user
     nameAndDescription: {
+      // this basically indicates that this property is not an actual property in database but rather used as an intermediary property which combines name and description properties in database.
       type: Sequelize.DataTypes.VIRTUAL,
       get() {
         // setter and getter functions can only use syncronous methods.
