@@ -490,6 +490,11 @@ const combineNameAndDescription = (tableModel) => {
     });
 };
 
+// "citizenshipNumber" is a unique key in user model
+// it will auto create a default number. Check the "defaultValue" section
+// of "citizenshipNumber" in userModel.js to see how it is done.
+// it might give a zlib error, because it uses "defaultValue" of "description"
+// section since no description is provided here. zlib throws an error in those cases.
 const createUniqueCitizenshipId = (tableModel) => {
   tableModel
     .create({

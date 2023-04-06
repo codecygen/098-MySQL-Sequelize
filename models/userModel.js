@@ -216,6 +216,6 @@ const User = sequelize.define(
 
 // combineNameAndDescription(User);
 
-createUniqueCitizenshipId(User);
+// createUniqueCitizenshipId(User);
 
 module.exports = User;
