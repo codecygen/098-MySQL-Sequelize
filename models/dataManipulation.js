@@ -476,6 +476,9 @@ const descriptionGetter = (tableModel) => {
     });
 };
 
+//--
+// VIRTUAL FIELDS: "type: Sequelize.DataTypes.VIRTUAL," in userModel.js
+//--
 // This function uses the getter function in "nameAndDescription" section in userModel.js
 // nameAndDescription basically does a simple string concatenation to
 // combine name and description of a user in database.
@@ -490,6 +493,9 @@ const combineNameAndDescription = (tableModel) => {
     });
 };
 
+//--
+// CONSTRAINTS: "unique: true," in "citizenshipNumber" in userModel.js
+//--
 // "citizenshipNumber" is a unique key in user model
 // it will auto create a default number. Check the "defaultValue" section
 // of "citizenshipNumber" in userModel.js to see how it is done.
