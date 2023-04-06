@@ -40,6 +40,7 @@ const {
   combineNameAndDescription,
   createUniqueCitizenshipId,
   emailValidityCheckAndInsertNewUser,
+  ageValidityCheckAndInserNewUser,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -101,6 +102,14 @@ const User = sequelize.define(
     age: {
       type: Sequelize.DataTypes.INTEGER,
       defaultValue: 21,
+      // validators
+      validate: {
+        isValidAge(enteredAge) {
+          if (enteredAge < 18) {
+            throw new Error("You cannot register because you are not 18!");
+          }
+        },
+      },
     },
 
     citizenshipNumber: {
@@ -221,6 +230,8 @@ const User = sequelize.define(
 
 // createUniqueCitizenshipId(User);
 
-emailValidityCheckAndInsertNewUser(User);
+// emailValidityCheckAndInsertNewUser(User);
+
+ageValidityCheckAndInserNewUser(User)
 
 module.exports = User;

@@ -534,6 +534,30 @@ const emailValidityCheckAndInsertNewUser = (tableModel) => {
     });
 };
 
+//--
+// VALIDATORS: " isValidAge(enteredAge)" in "age" field in userModel.js
+//--
+// validate: {
+//   isValidAge(enteredAge) {
+//     if (enteredAge < 18) {
+//       throw new Error("You cannot register because you are not 18!");
+//     }
+//   }
+// }
+const ageValidityCheckAndInserNewUser = (tableModel) => {
+  tableModel
+    .create({
+      // will throw error because 11 is less than 18
+      age: 11,
+    })
+    .then((result) => {
+      console.log(result.toJSON());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 module.exports = {
   createTableRow,
   deleteTableRowById,
@@ -563,4 +587,5 @@ module.exports = {
   combineNameAndDescription,
   createUniqueCitizenshipId,
   emailValidityCheckAndInsertNewUser,
+  ageValidityCheckAndInserNewUser,
 };

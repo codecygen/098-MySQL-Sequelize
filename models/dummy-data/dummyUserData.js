@@ -2,7 +2,7 @@ const newData = {
   name: "aras5",
   password: "useraras",
   email: "aras@gmail.com",
-  age: 11,
+  age: 25,
   permission: true,
 };
 
@@ -26,7 +26,7 @@ const newDataSet = [
     name: "jordan",
     password: "awesome",
     email: "awe@gmail.com",
-    age: 12,
+    age: 18,
     permission: false,
   },
   {
@@ -50,7 +50,7 @@ const longPassDataSet = [
     name: "jordan",
     password: "awesome1",
     email: "awe@gmail.com",
-    age: 12,
+    age: 19,
     permission: false,
   },
   {
