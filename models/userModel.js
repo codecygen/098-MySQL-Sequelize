@@ -12,6 +12,7 @@ const {
 } = require("./dummy-data/dummyUserData");
 
 const {
+  dropTable,
   createTableRow,
   deleteTableRowById,
   findTableRowById,
@@ -115,9 +116,9 @@ const User = sequelize.define(
     citizenshipNumber: {
       type: Sequelize.DataTypes.BIGINT,
       unique: true,
-      defaultValue: Math.abs(
+      defaultValue: parseInt(Math.abs(
         Math.floor(Math.random() * 1e14) - Math.floor(Math.random() * 1e13) * 10
-      ),
+      ).toString().slice(0, 8)),
     },
 
     permission: {
@@ -169,10 +170,11 @@ const User = sequelize.define(
     // timeStamps: false,
     // tableName: "custom-name",
     // version: true,
-    // version: true,
     // paranoid: true
   }
 );
+
+// dropTable(User);
 
 // createTableRow(User, longPassData); // failes because defies the password length which is not in between 5 and 10 characters! It is defined in the model's password section with "validate" keyword
 
@@ -232,6 +234,6 @@ const User = sequelize.define(
 
 // emailValidityCheckAndInsertNewUser(User);
 
-ageValidityCheckAndInserNewUser(User)
+// ageValidityCheckAndInserNewUser(User)
 
 module.exports = User;

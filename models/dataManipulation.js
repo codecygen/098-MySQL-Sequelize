@@ -1,6 +1,16 @@
 const { Op } = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
+// drop method
+const dropTable = (tableModel) => {
+  tableModel
+    .drop()
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => console.error(err));
+};
+
 // build, save, create methods
 const createTableRow = (tableModel, newData) => {
   // only creates new data
@@ -534,6 +544,16 @@ const createUniqueCitizenshipId = (tableModel) => {
 // validate: {
 //   isIn: ["aras@gmail.com", "aras@gmail.org"],
 // },
+
+// // OR, if you want to have a specific error message,
+
+// validate: {
+//   isIn: {
+//     args: [["aras@gmail.com", "aras@gmail.org"]],
+//     msg: "The provided email must be one of the following..."
+//   },
+// },
+
 //--------------------------------
 // // Checks the value is numeric
 // // throws a special message as error
@@ -604,6 +624,7 @@ const ageValidityCheckAndInserNewUser = (tableModel) => {
 };
 
 module.exports = {
+  dropTable,
   createTableRow,
   deleteTableRowById,
   findTableRowById,
