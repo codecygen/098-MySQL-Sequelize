@@ -494,7 +494,7 @@ const combineNameAndDescription = (tableModel) => {
 };
 
 //--
-// CONSTRAINTS: "unique: true," in "citizenshipNumber" in userModel.js
+// CONSTRAINTS: "unique: true," in "citizenshipNumber" field in userModel.js
 //--
 // "citizenshipNumber" is a unique key in user model
 // it will auto create a default number. Check the "defaultValue" section
@@ -506,8 +506,28 @@ const createUniqueCitizenshipId = (tableModel) => {
     .create({
       name: "dude1",
     })
-    .then((foundEntry) => {
-      console.log(foundEntry.toJSON());
+    .then((result) => {
+      console.log(result.toJSON());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+//--
+// VALIDATORS: "isEmail: true" in "email" field in userModel.js
+//--
+// validate: {
+//   isEmail: true,
+// },
+const emailValidityCheckAndInsertNewUser = (tableModel) => {
+  tableModel
+    .create({
+      // will throw error because "kagan" is not an email
+      email: "kagan",
+    })
+    .then((result) => {
+      console.log(result.toJSON());
     })
     .catch((err) => {
       console.error(err);
@@ -542,4 +562,5 @@ module.exports = {
   descriptionGetter,
   combineNameAndDescription,
   createUniqueCitizenshipId,
+  emailValidityCheckAndInsertNewUser,
 };

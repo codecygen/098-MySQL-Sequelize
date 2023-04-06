@@ -39,6 +39,7 @@ const {
   descriptionGetter,
   combineNameAndDescription,
   createUniqueCitizenshipId,
+  emailValidityCheckAndInsertNewUser,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -70,6 +71,7 @@ const User = sequelize.define(
     password: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
+      // validators.......
       // validate: {
       //   len: [5, 10],
       // },
@@ -88,9 +90,10 @@ const User = sequelize.define(
     email: {
       type: Sequelize.DataTypes.STRING, // type: Sequelize.DataTypes.STRING(25) means max 25 character, if you want to put it like this
       allowNull: false,
-      // validate: {
-      //   len: [1, 25], // Alternative to type: Sequelize.DataTypes.STRING(25)
-      // },
+      validate: {
+        // validators
+        isEmail: true, // this is a built-in checker for sequelize
+      },
 
       defaultValue: `aras@email.com`,
     },
@@ -134,7 +137,7 @@ const User = sequelize.define(
         return enteredDescription;
       },
 
-      defaultValue: "A new dude in the village"
+      defaultValue: "A new dude in the village",
     },
 
     // this section will be used to retrieve name and description of a user
@@ -217,5 +220,7 @@ const User = sequelize.define(
 // combineNameAndDescription(User);
 
 // createUniqueCitizenshipId(User);
+
+emailValidityCheckAndInsertNewUser(User);
 
 module.exports = User;
