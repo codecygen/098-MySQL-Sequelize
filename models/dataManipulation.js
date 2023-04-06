@@ -514,6 +514,51 @@ const createUniqueCitizenshipId = (tableModel) => {
     });
 };
 
+//--------------------------------
+//--------------------------------
+// VALIDATORS
+//--------------------------------
+//--------------------------------
+// some built in validator functions in sequelize
+// These have to be put into model file "userModel.js"
+//--------------------------------
+// // Checks if email is a valid email
+//--------------------------------
+// validate: {
+//   isEmail: true,
+// },
+//--------------------------------
+// // Checks if one of them are entered for newly created email
+// // email has to be either of these values
+//--------------------------------
+// validate: {
+//   isIn: ["aras@gmail.com", "aras@gmail.org"],
+// },
+//--------------------------------
+// // Checks the value is numeric
+// // throws a special message as error
+//--------------------------------
+// validate: {
+//   isNumeric: {
+//     msg: "You must entere a number for age!"
+//   },
+// },
+//--------------------------------
+// You can put as many validator as you want inside same curly braces
+//--------------------------------
+// validate: {
+//   isNumeric: {
+//     msg: "You must enter a number for age!"
+//   },
+//   isValidAge(enteredAge) {
+//     if (enteredAge < 18) {
+//       throw new Error("You cannot register because you are not 18!");
+//     }
+//   }
+// }
+//--------------------------------
+//--------------------------------
+
 //--
 // VALIDATORS: "isEmail: true" in "email" field in userModel.js
 //--
