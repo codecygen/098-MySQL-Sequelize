@@ -116,9 +116,14 @@ const User = sequelize.define(
     citizenshipNumber: {
       type: Sequelize.DataTypes.BIGINT,
       unique: true,
-      defaultValue: parseInt(Math.abs(
-        Math.floor(Math.random() * 1e14) - Math.floor(Math.random() * 1e13) * 10
-      ).toString().slice(0, 8)),
+      defaultValue: parseInt(
+        Math.abs(
+          Math.floor(Math.random() * 1e14) -
+            Math.floor(Math.random() * 1e13) * 10
+        )
+          .toString()
+          .slice(0, 8)
+      ),
     },
 
     permission: {
@@ -165,12 +170,23 @@ const User = sequelize.define(
     // timestamps: A boolean that determines whether to create createdAt and updatedAt columns in the database. If set to false, these columns will not be created.
     // tableName: A string that defines the name of the table in the database. If not specified, Sequelize will use the pluralized form of the model name.
     // version: A boolean or string that defines the name of the column that will be used for optimistic locking. If set to true, the default column name will be version. If set to a string, that string will be used as the column name.
-    // paranoid: A boolean that enables "soft deletes", meaning that records are not actually deleted from the database but are marked as deleted by setting a deletedAt timestamp. If set to true, this option enables "soft deletes" for the model.
+    // paranoid: A boolean that enables "soft deletes", meaning that records are not actually deleted from the database but are marked as deleted by setting a deletedAt timestamp. If set to true, this option enables "soft deletes" for the model. Use this with "timestamps: true"
+    // -----------------------
+    // -----------------------
+    // -----------------------
     // freezeTableName: true,
-    // timeStamps: false,
+    // timestamps: false,
     // tableName: "custom-name",
     // version: true,
-    // paranoid: true
+    // paranoid: true,
+    // -----------------------
+    // -----------------------
+    // -----------------------
+    // USING PARANOID TABLES ----------
+    // paranoid: true,
+    // timestamps: true,
+    // deletedAt: "timeDestroyed" // deletedAt column in automatically added when a table row is deleted. You can customize the name of the new column as shown.
+    // -----------------------
   }
 );
 
