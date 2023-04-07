@@ -625,15 +625,47 @@ const ageValidityCheckAndInserNewUser = (tableModel) => {
 
 //--------------------------------
 //--------------------------------
-// Look at the PARANOID TABLES section in userModel.js and learn about destroy and restore methods that can be used in this file ("dataManipulation.js").
 // Look at the PARANOID TABLES section in userModel.js
 // There is a way on how to enable the PARANOID TABLE for the model
 // In Sequelize, the paranoid option enables "soft deletes" for a model, meaning that records are not actually deleted from the database but are marked as deleted by setting a deletedAt timestamp.
+// -----------------------
+// -----------------------
+// -----------------------
+// ---------- FORCE DELETION OF PARANOID TABLE LINES. THERE IS STILL A WAY TO DO IT IN dataManipulation.js ----------
+// ---------- destroy method for paranoid tables -----------------------
+// ----------------------- dataManipulation.js
+// User
+// .destroy({
+//   where: { id: 28 },
+//   force: true //////////////////// THIS KEYWORD IS REQUIRED TO FORCE DESTROY
+// })
+// .then((result) => {
+//   console.log(result);
+// })
+// .catch((err) => {
+//   console.error(err);
+// });
+// -----------------------
+// -----------------------
+// -----------------------
+// ---------- RESTORING THE DELETED LINE IN PARANOID TABLES. This has to be added to dataManipulation.js -----------------------
+// ---------- restore method for paranoid tables -----------------------
+// ----------------------- dataManipulation.js
+// User
+// .restore({ // THIS IS THE METHOD TO RESTORE DELETED ENTRIES IN PARANOID TABLES.
+//   where: { id: 28 },
+// })
+// .then((result) => {
+//   console.log(result);
+// })
+// .catch((err) => {
+//   console.error(err);
+// });
 //--------------------------------
 //--------------------------------
 // ------------ PARANOID TABLES, SOFT DELETION, RAW QUERIES STILL WORK
-// ------------ raw queries will ignore the soft deletion and get the lines even if they are soft deleted.
-// ------------ This will get the first entry in users table even if it is soft deleted, because this is a raw query.
+// ------------ raw queries will not treat the soft deletion as deleted at all and get the lines.
+// ------------ This will get the first entry in users table even if it is soft deleted, BECUASE THIS IS A RAW QUERY.
 // sequelize
 //   .query("SELECT * from user LIMIT 1")
 //   .then((data) => {
@@ -642,6 +674,20 @@ const ageValidityCheckAndInserNewUser = (tableModel) => {
 //   .catch((err) => {
 //     console.error(err);
 //   });
+//--------------------------------
+//--------------------------------
+//--------------------------------
+// ------------ PARANOID TABLES, SOFT DELETION, NORMAL SEQUELIZE QUERIES WILL STILL WORK WITH AN EXTRA ARGUMENT
+// ------------ normal sequelize queries will not treat the soft deletion as deleted IF AN EXTRA ARGUMENT PASSED INTO THE METHOD.
+// ------------ This will get the first entry in users table even if it is soft deleted, BECAUSE AN EXTRA ARGUMENT IS PASSED TO THE NORMAL SEQUELIZE QUERY.
+// User.findOne(
+//   { paranoid: false } // because of this line, this query will not treat soft deleted first query as deleted.
+// )
+//   .then((foundEntry) => {
+//     console.log(foundEntry.toJSON());
+//   })
+//   .catch((err) => console.error(err));
+//--------------------------------
 //--------------------------------
 //--------------------------------
 

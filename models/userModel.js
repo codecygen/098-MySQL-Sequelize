@@ -190,36 +190,6 @@ const User = sequelize.define(
     // -----------------------
     // -----------------------
     // -----------------------
-    // ---------- FORCE DELETION OF PARANOID TABLE LINES. THERE IS STILL A WAY TO DO IT IN dataManipulation.js ----------
-    // ---------- destroy method for paranoid tables -----------------------
-    // ----------------------- dataManipulation.js
-    // User
-    // .destroy({ 
-    //   where: { id: 28 },
-    //   force: true //////////////////// THIS KEYWORD IS REQUIRED TO FORCE DESTROY
-    // })
-    // .then((result) => {
-    //   console.log(result);
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    // });
-    // -----------------------
-    // -----------------------
-    // -----------------------
-    // ---------- RESTORING THE DELETED LINE IN PARANOID TABLES. This has to be added to dataManipulation.js -----------------------
-    // ---------- restore method for paranoid tables -----------------------
-    // ----------------------- dataManipulation.js
-    // User
-    // .restore({ // THIS IS THE KEYWORD TO RESTORE DELETED ENTRIES IN PARANOID TABLES.
-    //   where: { id: 28 },
-    // })
-    // .then((result) => {
-    //   console.log(result);
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    // });
   }
 );
 
