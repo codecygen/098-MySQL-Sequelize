@@ -623,6 +623,15 @@ const ageValidityCheckAndInserNewUser = (tableModel) => {
     });
 };
 
+//--------------------------------
+//--------------------------------
+// Look at the PARANOID TABLES section in userModel.js and learn about destroy and restore methods that can be used in this file ("dataManipulation.js").
+// Look at the PARANOID TABLES section in userModel.js
+// There is a way on how to enable the PARANOID TABLE for the model
+// In Sequelize, the paranoid option enables "soft deletes" for a model, meaning that records are not actually deleted from the database but are marked as deleted by setting a deletedAt timestamp.
+//--------------------------------
+//--------------------------------
+
 module.exports = {
   dropTable,
   createTableRow,
