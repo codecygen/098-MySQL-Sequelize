@@ -631,6 +631,19 @@ const ageValidityCheckAndInserNewUser = (tableModel) => {
 // In Sequelize, the paranoid option enables "soft deletes" for a model, meaning that records are not actually deleted from the database but are marked as deleted by setting a deletedAt timestamp.
 //--------------------------------
 //--------------------------------
+// ------------ PARANOID TABLES, SOFT DELETION, RAW QUERIES STILL WORK
+// ------------ raw queries will ignore the soft deletion and get the lines even if they are soft deleted.
+// ------------ This will get the first entry in users table even if it is soft deleted, because this is a raw query.
+// sequelize
+//   .query("SELECT * from user LIMIT 1")
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+//--------------------------------
+//--------------------------------
 
 module.exports = {
   dropTable,

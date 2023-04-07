@@ -13,3 +13,4 @@ PORT=3306
 
 # Additional Notes:
 - zlib and bcrypt used for this project.
+- All the sequelize related notes can be found in "dataManipulation.js" and "userModel.js".
