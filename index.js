@@ -20,6 +20,7 @@ databaseAuth();
 // sequelize.drop({ match: /g/ }); // find the first occurence of letter g in a tables and drop them.
 // sequelize.drop({ match: /\d/g }); // finds all occurences of digits in tables and drop them.
 
+// sequelize-associations
 // "foreignKey" property changes default foreign key from "userId" to "allUsers"
 User.hasOne(UserMotto, { foreignKey: 'allUsers' });
 

@@ -14,3 +14,6 @@ PORT=3306
 # Additional Notes:
 - zlib and bcrypt used for this project.
 - All the sequelize related notes can be found in "dataManipulation.js" and "userModel.js".
+
+# Keywords:
+- **sequelize-associations**: it is useful to create associations for different tables for one to one, one to many and many to many relations.
