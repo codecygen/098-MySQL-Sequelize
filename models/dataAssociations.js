@@ -7,7 +7,6 @@ const User = require("./userModel");
 const Post = require("./postModel");
 const UserMotto = require("./userMottoModel");
 
-
 databaseAuth();
 
 // sequelize-associations
