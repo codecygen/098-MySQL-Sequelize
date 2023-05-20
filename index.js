@@ -1,15 +1,6 @@
 require("dotenv").config();
 
-const { sequelize, databaseAuth } = require("./models/dbConnection");
-
-// Needs to be imported even if it is not used
-// Because it is seen by sequelize.sync method in this file
-// and the model is updated accordingly in database.
-const User = require("./models/userModel");
-const Post = require("./models/postModel");
-const UserMotto = require("./models/userMottoModel");
-
-databaseAuth();
+const { sequelize, User, UserMotto, Post } = require("./models/dataAssociations");
 
 // User.sync.then.catch, // would only sync User model.
 // User.drop(); // would drop the table and if we write it would not exist.
@@ -19,10 +10,6 @@ databaseAuth();
 // sequelize.drop({ match: /g/g }); // drop tables that has letter "g" in it.
 // sequelize.drop({ match: /g/ }); // find the first occurence of letter g in a tables and drop them.
 // sequelize.drop({ match: /\d/g }); // finds all occurences of digits in tables and drop them.
-
-// sequelize-associations
-// "foreignKey" property changes default foreign key from "userId" to "allUsers"
-User.hasOne(UserMotto, { foreignKey: 'allUsers' });
 
 sequelize
   // .sync({ force: true }) // deletes all data and recreates the database with the model configs,
