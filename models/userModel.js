@@ -115,7 +115,7 @@ const User = sequelize.define(
 
     citizenshipNumber: {
       type: Sequelize.DataTypes.BIGINT,
-      unique: true,
+      unique: false,
       defaultValue: parseInt(
         Math.abs(
           Math.floor(Math.random() * 1e14) -
