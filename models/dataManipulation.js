@@ -1,6 +1,15 @@
 const { Op } = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
+// Some notes and simple regex related info
+// User.drop(); // would drop the table and if we write it would not exist.
+// sequelize.drop({ match: /^test/ }); // drop tables that starts with "test"
+// sequelize.drop({ match: /test$/ }); // drop tables that ends with "test"
+// sequelize.drop({ match: /aras/i }); // drop tables that has "aras" in it, looks for the string in a case insensitive way.
+// sequelize.drop({ match: /g/g }); // drop tables that has letter "g" in it.
+// sequelize.drop({ match: /g/ }); // find the first occurence of letter g in a tables and drop them.
+// sequelize.drop({ match: /\d/g }); // finds all occurences of digits in tables and drop them.
+
 // drop method
 const dropTable = (tableModel) => {
   tableModel
