@@ -209,7 +209,7 @@ const User = sequelize.define(
 
 // bulkCreateTableData(User, longPassDataSet); // failes because defies the password length which is not in between 5 and 10 characters! It is defined in the model's password section with "validate" keyword
 
-// bulkCreateTableData(User, newDataSet);
+bulkCreateTableData(User, newDataSet);
 
 // getAllTableData(User, ["name", "password"]); // second argument is optional
 

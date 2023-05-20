@@ -7,6 +7,7 @@ const { sequelize, databaseAuth } = require("./models/dbConnection");
 // and the model is updated accordingly in database.
 const User = require("./models/userModel");
 const Post = require("./models/postModel");
+const UserMotto = require("./models/userMottoModel");
 
 databaseAuth();
 
@@ -18,6 +19,9 @@ databaseAuth();
 // sequelize.drop({ match: /g/g }); // drop tables that has letter "g" in it.
 // sequelize.drop({ match: /g/ }); // find the first occurence of letter g in a tables and drop them.
 // sequelize.drop({ match: /\d/g }); // finds all occurences of digits in tables and drop them.
+
+// "foreignKey" property changes default foreign key from "userId" to "allUsers"
+User.hasOne(UserMotto, { foreignKey: 'allUsers' });
 
 sequelize
   // .sync({ force: true }) // deletes all data and recreates the database with the model configs,
