@@ -8,6 +8,10 @@ const UserMotto = sequelize.define("user-motto", {
     allowNull: false,
     primaryKey: true,
   },
+
+  motto: {
+    type: Sequelize.DataTypes.STRING,
+  },
 });
 
 module.exports = UserMotto;

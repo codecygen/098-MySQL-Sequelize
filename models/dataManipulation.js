@@ -1,6 +1,9 @@
 const { Op } = require("sequelize");
 const { sequelize } = require("./dbConnection");
 
+const User = require("./userModel");
+const UserMotto = require("./userMottoModel");
+
 // Some notes and simple regex related info
 // User.drop(); // would drop the table and if we write it would not exist.
 // sequelize.drop({ match: /^test/ }); // drop tables that starts with "test"
@@ -700,6 +703,59 @@ const ageValidityCheckAndInserNewUser = (tableModel) => {
 //--------------------------------
 //--------------------------------
 
+// This section will focus on establishing relations in  between
+// "users" and "user-mottos" tables.
+// normally disregards validate keyword for password for User Model if the second argument "validate: true" is not specified.
+const bulkCreateUserAndMotto = () => {
+  const exampleUserSet = [
+    {
+      name: "dan",
+      password: "dan12",
+      email: "dan@gmail.com",
+      age: 66,
+      permission: false,
+    },
+    {
+      name: "jordan",
+      password: "awesome1",
+      email: "awe@gmail.com",
+      age: 19,
+      permission: false,
+    },
+    {
+      name: "newdude",
+      password: "secretkey567dkasjghsdlkhjsdfhdsfl;hdlkjgsodigsld;gvsdklgvsd",
+      email: "dudeawesome@gmail.com",
+      age: 38,
+      permission: true,
+    },
+  ];
+
+  const exampleMottoSet = [
+    {
+      motto: "One thing at a time",
+    },
+    {
+      motto: "Greatness is measured by courage and heart",
+    },
+    {
+      motto: "Your pain today will be your strength tomorrow",
+    },
+  ];
+
+  User.bulkCreate(exampleUserSet)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => console.error(err));
+
+  UserMotto.bulkCreate(exampleMottoSet)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => console.error(err));
+};
+
 module.exports = {
   dropTable,
   createTableRow,
@@ -731,4 +787,5 @@ module.exports = {
   createUniqueCitizenshipId,
   emailValidityCheckAndInsertNewUser,
   ageValidityCheckAndInserNewUser,
+  bulkCreateUserAndMotto,
 };

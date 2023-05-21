@@ -42,6 +42,7 @@ const {
   createUniqueCitizenshipId,
   emailValidityCheckAndInsertNewUser,
   ageValidityCheckAndInserNewUser,
+  bulkCreateUserAndMotto,
 } = require("./dataManipulation");
 
 // Commonly used data types are:
@@ -253,6 +254,8 @@ const User = sequelize.define(
 
 // emailValidityCheckAndInsertNewUser(User);
 
-// ageValidityCheckAndInserNewUser(User)
+// ageValidityCheckAndInserNewUser(User);
+
+bulkCreateUserAndMotto();
 
 module.exports = User;
